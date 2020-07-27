@@ -53,7 +53,7 @@ public class FileServlet extends HttpServlet {
                     item.write(new File(storeDirectory , filename));
 
                     String filePath = "/file/"+ filename;
-                    message = "http://14.29.169.203:8080/TaskManagement"+filePath;
+                    message = "http://14.29.169.203:8080/TaskForWeb"+filePath;
                 }
             }
         } catch (Exception e) {
