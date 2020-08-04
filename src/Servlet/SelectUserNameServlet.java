@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet(name = "SelectUserNameServlet")
 public class SelectUserNameServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -21,8 +20,9 @@ public class SelectUserNameServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         ObjectMapper mapper = new ObjectMapper();
 
+        taskDao_interface userDao=null;
         try {
-            taskDao_interface userDao= DaoFactory.getUsersDao();
+            userDao= DaoFactory.getUsersDao();
             ArrayList<String> namelist = userDao.allUserName();
 
 
@@ -32,6 +32,14 @@ public class SelectUserNameServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (userDao!=null){
+                    userDao.closeDB();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }

@@ -25,6 +25,13 @@ public class taskDaoImpl implements taskDao_interface {
 
 
 	@Override
+	public void closeDB() throws Exception {
+		if(pstmt!=null) {
+			pstmt.close();
+		}
+	}
+
+	@Override
 	public int checkVersionCode() throws Exception {
 
 		int version_code =0;
@@ -107,7 +114,7 @@ public class taskDaoImpl implements taskDao_interface {
 	}
 
 
-	//批准执行,修改用户状态
+	//修改用户状态.密码
 	public Boolean updateUserState(User user, String pw) throws Exception {
 		boolean mark=true;
 		//设置手动提交事务模式
@@ -186,6 +193,38 @@ public class taskDaoImpl implements taskDao_interface {
 			}
 		}
 		
+		return mark;
+	}
+
+
+
+	//添加评论
+	public boolean upadteTask(int id,String html) throws Exception {
+		boolean mark=true;
+		//设置手动提交事务模式
+		conn.setAutoCommit(false);
+
+		String sql="update task set content = ? where id = ?";
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, html);
+			pstmt.setInt(2, id);
+
+			pstmt.executeUpdate();
+
+			//手动提交事务
+			conn.commit();
+		}catch(Exception e){
+			mark=false;
+			//如有异常则回滚
+			conn.rollback();
+			e.printStackTrace();
+		}finally {
+			if(pstmt!=null) {
+				pstmt.close();
+			}
+		}
+
 		return mark;
 	}
 

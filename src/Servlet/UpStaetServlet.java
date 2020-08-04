@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
-@WebServlet(name = "UpStaetServlet")
 public class UpStaetServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -44,8 +43,9 @@ public class UpStaetServlet extends HttpServlet {
         AppPush appPush = new AppPush();
 
 
+        taskDao_interface userDao=null;
         try {
-            taskDao_interface userDao = DaoFactory.getUsersDao();
+            userDao = DaoFactory.getUsersDao();
 
             if ("agree".equals(flag)){
                 mark = userDao.updateTaskState1(user,task_id, GetDate.time());
@@ -172,6 +172,14 @@ public class UpStaetServlet extends HttpServlet {
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (userDao!=null){
+                    userDao.closeDB();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 

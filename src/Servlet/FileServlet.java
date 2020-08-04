@@ -1,6 +1,7 @@
 package Servlet;
 
 import Bean.User;
+import Tool.ConstValue;
 import Tool.GetDate;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -16,8 +17,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
-@WebServlet(name = "FileServlet")
 public class FileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -40,8 +41,13 @@ public class FileServlet extends HttpServlet {
                     // 更改文件名为唯一的
                     String filename = item.getName();
                     if (filename != null) {
+
+                        //生成10000以内的随机数
+                        String rannum = String.valueOf((int)(Math.random()*10000));
                         String time=GetDate.time().replace("-","").replace(" ","").replace(":","");
-                        filename =  user.getName()+ time+"." + FilenameUtils.getExtension(filename);
+
+                        //文件名拼接
+                        filename =  user.getName()+ time+"_"+rannum+"." + FilenameUtils.getExtension(filename);
                     }
                     // 生成存储路径
                     String storeDirectory = getServletContext().getRealPath("/file");
@@ -49,11 +55,13 @@ public class FileServlet extends HttpServlet {
                     if (!file.exists()) {
                         file.mkdir();
                     }
+
+
                     // 处理文件的上传
                     item.write(new File(storeDirectory , filename));
 
                     String filePath = "/file/"+ filename;
-                    message = "http://14.29.169.203:8080/TaskForWeb"+filePath;
+                    message = ConstValue.IP2 +filePath;
                 }
             }
         } catch (Exception e) {

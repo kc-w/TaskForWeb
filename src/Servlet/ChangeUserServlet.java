@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "ChangeUserServlet")
 public class ChangeUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -30,6 +29,7 @@ public class ChangeUserServlet extends HttpServlet {
         User user = (User)session.getAttribute("user");
 
         String message = "";
+        taskDao_interface userDao=null;
         try{
             DiskFileItemFactory dff = new DiskFileItemFactory();
             ServletFileUpload sfu = new ServletFileUpload(dff);
@@ -43,7 +43,7 @@ public class ChangeUserServlet extends HttpServlet {
                 }
             }
 
-            taskDao_interface userDao = DaoFactory.getUsersDao();
+            userDao = DaoFactory.getUsersDao();
 
             if (map.get("cid") == null){
                 User user1 = userDao.login(user.getNumber(),map.get("oldPW"));
@@ -72,6 +72,14 @@ public class ChangeUserServlet extends HttpServlet {
             e.printStackTrace();
             message = "发生错误!";
         } finally {
+
+            try {
+                if (userDao!=null){
+                    userDao.closeDB();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             response.getWriter().write(message);
         }
 

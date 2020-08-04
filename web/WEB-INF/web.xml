@@ -3,4 +3,110 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <servlet>
+        <servlet-name>CheckNewVersionServlet</servlet-name>
+        <servlet-class>Servlet.CheckNewVersionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckNewVersionServlet</servlet-name>
+        <url-pattern>/CheckNewVersionServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SelectUserNameServlet</servlet-name>
+        <servlet-class>Servlet.SelectUserNameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectUserNameServlet</servlet-name>
+        <url-pattern>/SelectUserNameServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>Servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeUserServlet</servlet-name>
+        <servlet-class>Servlet.ChangeUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeUserServlet</servlet-name>
+        <url-pattern>/ChangeUserServlet</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>SelectTaskServlet</servlet-name>
+        <servlet-class>Servlet.SelectTaskServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectTaskServlet</servlet-name>
+        <url-pattern>/SelectTaskServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpStaetServlet</servlet-name>
+        <servlet-class>Servlet.UpStaetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpStaetServlet</servlet-name>
+        <url-pattern>/UpStaetServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <servlet-class>Servlet.AddTaskServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddTaskServlet</servlet-name>
+        <url-pattern>/AddTaskServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FileServlet</servlet-name>
+        <servlet-class>Servlet.FileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileServlet</servlet-name>
+        <url-pattern>/FileServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>Servlet.SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/SearchServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProgressServlet</servlet-name>
+        <servlet-class>Servlet.ProgressServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProgressServlet</servlet-name>
+        <url-pattern>/ProgressServlet</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>codingFilter</filter-name>
+        <filter-class>Filter.codingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>codingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
 </web-app>

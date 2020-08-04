@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet(name = "SelectTaskServlet")
 public class SelectTaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,25 +34,43 @@ public class SelectTaskServlet extends HttpServlet {
         response.setContentType("text/json;charset=utf-8");
 
 
+        taskDao_interface userDao = null;
+
         //判断查询任务列表还是单个任务
         if (task_state==null || "".equals(task_state)){
 
             try {
-                taskDao_interface userDao = DaoFactory.getUsersDao();
+                userDao = DaoFactory.getUsersDao();
                 TaskAndUser taskAndUser = userDao.selectTask(Integer.valueOf(task_id));
                 json = mapper.writeValueAsString(taskAndUser);
             } catch (Exception e) {
                 e.printStackTrace();
+            }finally {
+                try {
+                    if (userDao!=null){
+                        userDao.closeDB();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }else {
 
             try {
-                taskDao_interface userDao = DaoFactory.getUsersDao();
+                userDao = DaoFactory.getUsersDao();
                 ArrayList<TaskAndUser> taskAndUsers = userDao.selectTaskState(task_state,user);
                 json = mapper.writeValueAsString(taskAndUsers);
             } catch (Exception e) {
                 e.printStackTrace();
+            }finally {
+                try {
+                    if (userDao!=null){
+                        userDao.closeDB();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }

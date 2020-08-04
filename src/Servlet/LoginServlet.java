@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
@@ -33,8 +32,9 @@ public class LoginServlet extends HttpServlet {
 
         ObjectMapper mapper = new ObjectMapper();
 
+        taskDao_interface userDao=null;
         try {
-            taskDao_interface userDao= DaoFactory.getUsersDao();
+            userDao= DaoFactory.getUsersDao();
             User user = userDao.login(number,password);
 
 
@@ -50,6 +50,14 @@ public class LoginServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (userDao!=null){
+                    userDao.closeDB();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }

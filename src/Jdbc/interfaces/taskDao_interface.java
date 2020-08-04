@@ -12,11 +12,17 @@ import java.util.List;
 public interface taskDao_interface {
 
 
+	public void closeDB() throws Exception ;
+
+
 	//版本更新检测
 	public int checkVersionCode()throws Exception;
 
 	//人数标签查询
 	public ArrayList<String> allUserName()throws Exception;
+
+	//更新事件内容
+	public boolean upadteTask(int id,String html) throws Exception;
 
 	//用户登录验证
 	public User login(String number, String password)throws Exception;
@@ -51,11 +57,11 @@ public interface taskDao_interface {
 	//删除任务
 	public Boolean deleteTask(int task_id) throws Exception;
 
-	//查找cid
+	//查找cid多人查询
 	public ArrayList<String> selectCids(List<String> names) throws Exception;
 
 
-	//查找cid
+	//查找cid单人查询
 	public ArrayList<String> selectCids(User user) throws Exception;
 	
 

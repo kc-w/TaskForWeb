@@ -37,9 +37,9 @@ public class SearchServlet extends HttpServlet {
         response.setContentType("text/json;charset=utf-8");
         PrintWriter out = response.getWriter();
 
-
+        taskDao_interface userDao=null;
         try {
-            taskDao_interface userDao = DaoFactory.getUsersDao();
+            userDao = DaoFactory.getUsersDao();
             ArrayList<TaskAndUser> taskAndUsers = userDao.SearchServlet(sql,user);
             String json = mapper.writeValueAsString(taskAndUsers);
 
@@ -48,6 +48,14 @@ public class SearchServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             out.close();
+        }finally {
+            try {
+                if (userDao!=null){
+                    userDao.closeDB();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         out.close();

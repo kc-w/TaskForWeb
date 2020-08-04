@@ -22,6 +22,10 @@ public class taskDaoService implements taskDao_interface {
 		this.dao=new taskDaoImpl(this.conn.getdb());
 	}
 
+	public void closeDB() throws Exception {
+		dao.closeDB();
+		conn.close();
+	}
 
 	@Override
 	public int checkVersionCode() throws Exception {
@@ -33,9 +37,15 @@ public class taskDaoService implements taskDao_interface {
 		return dao.allUserName();
 	}
 
+	@Override
+	public boolean upadteTask(int id, String html) throws Exception {
+		return dao.upadteTask(id,html);
+	}
+
 
 	//用户登陆验证
 	public User login(String number,String password) throws Exception {
+
 		return dao.login(number,password);
 	}
 

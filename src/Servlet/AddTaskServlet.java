@@ -21,7 +21,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "AddTaskServlet")
 public class AddTaskServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -48,9 +47,9 @@ public class AddTaskServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
 
-
+        taskDao_interface userDao=null;
         try {
-            taskDao_interface userDao = DaoFactory.getUsersDao();
+            userDao = DaoFactory.getUsersDao();
             Boolean mark = userDao.addTask(task);
 
             if (mark){
@@ -73,6 +72,14 @@ public class AddTaskServlet extends HttpServlet {
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            try {
+                if (userDao!=null){
+                    userDao.closeDB();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 
