@@ -61,12 +61,12 @@ public class FileServlet extends HttpServlet {
                     item.write(new File(storeDirectory , filename));
 
                     String filePath = "/file/"+ filename;
-                    message = ConstValue.IP2 +filePath;
+                    message = ConstValue.IP +filePath;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            message = "上传图片失败";
+            message = "上传失败";
         } finally {
             System.out.println("返回的文件路径:"+message);
             response.getWriter().write(message);
