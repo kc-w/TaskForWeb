@@ -63,13 +63,22 @@ public class UpStaetServlet extends HttpServlet {
                         appPush.push(cids,"有新事件待确认!",taskAndUser.getTask().getName());
                     }else {
 
+                        Map<String, String> combineResultMap = new HashMap<String, String>();
+
+
                         ObjectMapper mapper = new ObjectMapper();
                         Map<String, String> execute_map=mapper.readValue(json1, Map.class);
-                        Map<String, String> assist_map=mapper.readValue(json2, Map.class);
 
-                        Map<String, String> combineResultMap = new HashMap<String, String>();
                         combineResultMap.putAll(execute_map);
-                        combineResultMap.putAll(assist_map);
+
+
+                        if (!"".equals(json2) && json2!=null){
+                            Map<String, String> assist_map=mapper.readValue(json2, Map.class);
+                            combineResultMap.putAll(assist_map);
+                        }
+
+
+
 
                         Set<String> s1 = combineResultMap.keySet();//获取KEY集合
                         List<String> arrayList = new ArrayList<String>();
@@ -167,14 +176,16 @@ public class UpStaetServlet extends HttpServlet {
 
 
 
-            out.write("{\"message\":"+message+"}");
-
-            out.close();
         } catch (Exception e) {
+            message="系统错误！";
             e.printStackTrace();
         }finally {
+
+            out.write("{\"message\":"+message+"}");
+            out.close();
             try {
                 if (userDao!=null){
+
                     userDao.closeDB();
                 }
             } catch (Exception e) {
