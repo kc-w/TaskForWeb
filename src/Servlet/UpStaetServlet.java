@@ -181,7 +181,7 @@ public class UpStaetServlet extends HttpServlet {
             e.printStackTrace();
         }finally {
 
-            out.write("{\"message\":"+message+"}");
+            out.write(message);
             out.close();
             try {
                 if (userDao!=null){
