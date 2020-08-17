@@ -47,7 +47,7 @@ public class ProgressServlet extends HttpServlet {
 
             String html = task.getTask().getContent();
 
-            String data="</br>汇报人:"+user.getName()+"&nbsp;&nbsp;&nbsp;汇报日期:"+GetDate.time()+"</br></br>";
+            String data="</br><p style=\"border:1px solid #000000;\">汇报人:"+user.getName()+"&nbsp;&nbsp;&nbsp;汇报日期:"+GetDate.time()+"</p>";
 
             userDao.upadteTask(id,html+data+httpHtml);
 

@@ -160,7 +160,7 @@ public class taskDaoImpl implements taskDao_interface {
 		//设置手动提交事务模式
 		conn.setAutoCommit(false);
 		
-		String sql="insert into task" +
+		String sql="insert into task_temp" +
 				"(name,content,start_id,start_time,preset_time,execute_people,assist_people,agree_id,agree_time,finish_time,state)" +
 				"values(?,?,?,?,?,?,?,?,?,?,?)";
 		try {
@@ -204,7 +204,7 @@ public class taskDaoImpl implements taskDao_interface {
 		//设置手动提交事务模式
 		conn.setAutoCommit(false);
 
-		String sql="update task set content = ? where id = ?";
+		String sql="update task_temp set content = ? where id = ?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, html);
@@ -245,7 +245,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a12='进行中' and (table1.b5 like ? or table1.a7 like ? or table1.a7 like ? or table1.a8 like ? or table1.a8 like ?) and (select TIMESTAMPDIFF(DAY, current_timestamp,table1.a6 ))>=0 order by table1.a5 desc";
 			}
 			if("待批准".equals(task_state)){
@@ -255,7 +255,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a12='待批准' and (table1.b5 like ? or table1.a7 like ? or table1.a7 like ? or table1.a8 like ? or table1.a8 like ?)  order by table1.a5 desc";
 
 			}
@@ -266,7 +266,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a12='已完成' and (table1.b5 like ? or table1.a7 like ? or table1.a7 like ? or table1.a8 like ? or table1.a8 like ?) order by table1.a5 desc";
 
 			}
@@ -277,7 +277,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a12='进行中' and (table1.b5 like ? or table1.a7 like ? or table1.a7 like ? or table1.a8 like ? or table1.a8 like ?) and (select TIMESTAMPDIFF(DAY, current_timestamp,table1.a6 ))<0 order by table1.a5 desc";
 			}
 
@@ -288,7 +288,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where (table1.a7 like ? or table1.a7 like ? or table1.a8 like ? or table1.a8 like ? or table1.a4= ? or table1.a9 =?) order by table1.a5 desc";
 			}
 		}else {
@@ -300,7 +300,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a12='进行中' and (select TIMESTAMPDIFF(DAY, current_timestamp,table1.a6 ))>=0 order by table1.a5 desc";
 
 			}
@@ -312,7 +312,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a12='待批准' order by table1.a5 desc";
 
 
@@ -325,7 +325,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a12 = '已完成' order by table1.a5 desc";
 
 			}
@@ -337,7 +337,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a12='进行中' and (select TIMESTAMPDIFF(DAY, current_timestamp,table1.a6 ))<0 order by table1.a5 desc";
 
 			}
@@ -349,7 +349,7 @@ public class taskDaoImpl implements taskDao_interface {
 						"task.execute_people as a7,task.assist_people as a8,task.agree_id as a9,task.agree_time as a10,task.finish_time as a11,task.state as a12,"+
 						"user.id as b1,user.name as b2,user.number as b3,user.password as b4,user.department as b5,user.permission as b6,"+
 						"user1.id as c1,user1.name as c2,user1.number as c3,user1.password as c4,user1.department as c5,user1.permission as c6 "+
-						"from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
+						"from task_temp as task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id)  as table1 "+
 						"where table1.a7 like ? or table1.a7 like ? or table1.a8 like ? or table1.a8 like ? or table1.a4= ? or table1.a9 =?  order by table1.a5 desc";
 
 			}
@@ -372,7 +372,7 @@ public class taskDaoImpl implements taskDao_interface {
 					pstmt.setInt(5, user.getId());
 					pstmt.setInt(6, user.getId());
 				}else{
-					pstmt.setString(1, user.getDepartment());
+					pstmt.setString(1, "%"+user.getDepartment()+"%");
 					pstmt.setString(2, "%"+user.getName()+"%");
 					pstmt.setString(3, "%"+"全体员工"+"%");
 					pstmt.setString(4, "%"+user.getName()+"%");
@@ -391,10 +391,16 @@ public class taskDaoImpl implements taskDao_interface {
 			}
 
 
+			System.out.println(pstmt.toString());
+
 			rs=pstmt.executeQuery();
+
+
 
 			while(rs.next()) {
 				TaskAndUser taskAndUser = new TaskAndUser();
+
+				System.out.println(rs.getInt(1));
 
 
 				taskAndUser.getTask().setId(rs.getInt(1));
@@ -456,7 +462,7 @@ public class taskDaoImpl implements taskDao_interface {
 
 		TaskAndUser taskAndUser = new TaskAndUser();
 
-		String sql="select task.*,user.*,user1.* from task,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id and task.id = ?";
+		String sql="select task.*,user.*,user1.* from task_temp as task ,user,user as user1 where task.start_id = user.id and task.agree_id = user1.id and task.id = ?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, task_id);
@@ -507,7 +513,7 @@ public class taskDaoImpl implements taskDao_interface {
 		//设置手动提交事务模式
 		conn.setAutoCommit(false);
 
-		String sql="update task set agree_id = ?,agree_time= ?,state= ? where id = ?";
+		String sql="update task_temp set agree_id = ?,agree_time= ?,state= ? where id = ?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getId());
@@ -538,7 +544,7 @@ public class taskDaoImpl implements taskDao_interface {
 		//设置手动提交事务模式
 		conn.setAutoCommit(false);
 
-		String sql="update task set state= ?,finish_time= ? where id = ?";
+		String sql="update task_temp set state= ?,finish_time= ? where id = ?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, "已完成");
@@ -568,7 +574,7 @@ public class taskDaoImpl implements taskDao_interface {
 		//设置手动提交事务模式
 		conn.setAutoCommit(false);
 
-		String sql="update task set agree_id = ?,agree_time= ?,state= ? where id = ?";
+		String sql="update task_temp set agree_id = ?,agree_time= ?,state= ? where id = ?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, user.getId());
@@ -599,7 +605,7 @@ public class taskDaoImpl implements taskDao_interface {
 		//设置手动提交事务模式
 		conn.setAutoCommit(false);
 
-		String sql="update task set execute_people = ?,assist_people= ? where id = ?";
+		String sql="update task_temp set execute_people = ?,assist_people= ? where id = ?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, json1);
@@ -630,11 +636,18 @@ public class taskDaoImpl implements taskDao_interface {
 		//设置手动提交事务模式
 		conn.setAutoCommit(false);
 
-		String sql="delete from task where id = ?";
+		String sql="delete from task_temp where id = ?";
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1,task_id);
+
+
+			System.out.println(pstmt.toString());
+
 			pstmt.executeUpdate();
+
+
+
 
 			//手动提交事务
 			conn.commit();
@@ -766,8 +779,6 @@ public class taskDaoImpl implements taskDao_interface {
 		pstmt.setInt(2,user.getPermission());
 		rs=pstmt.executeQuery();
 
-		System.out.println(pstmt.toString());
-
 		while(rs.next()) {
 
 			if (rs.getString(1)==null || "".equals(rs.getString(1))){
@@ -775,7 +786,6 @@ public class taskDaoImpl implements taskDao_interface {
 			}else {
 				cids.add(rs.getString(1));
 			}
-
 
 		}
 

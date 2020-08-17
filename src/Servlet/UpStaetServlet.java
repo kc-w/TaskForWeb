@@ -125,6 +125,7 @@ public class UpStaetServlet extends HttpServlet {
                     message="确认失败!";
                 }
             }
+
             if ("delete".equals(flag)){
                 mark = userDao.deleteTask(task_id);
                 if (mark){
