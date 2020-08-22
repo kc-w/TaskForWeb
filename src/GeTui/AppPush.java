@@ -20,7 +20,7 @@ public class AppPush {
     // STEP1：获取应用基本信息
     private static String appId = "K5j7ubhMgZ9J3cYPSzK9dA";
     private static String appKey = "feGWlAp3vl8FbFeaf0viW6";
-    private static String masterSecret = "yBLMPBnblv8HtLrSPWVYZ3";
+    private static String masterSecret = "0i5iYOfeu49jNCuNP8smA";
     private static String url = "http://api.getui.com/apiex.htm";
 
     public void push(List<String> cids,String title,String content){
@@ -87,7 +87,6 @@ public class AppPush {
 
                 //单推——推送指定客户端推送 pushMessageToSingle(SingleMessage message, Target target)
                 IPushResult ret1 = push.pushMessageToSingle(message1,target);
-                System.out.println(ret1.getResponse().toString());
             }
 
         }

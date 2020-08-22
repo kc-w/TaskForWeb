@@ -391,17 +391,12 @@ public class taskDaoImpl implements taskDao_interface {
 			}
 
 
-			System.out.println(pstmt.toString());
-
 			rs=pstmt.executeQuery();
 
 
 
 			while(rs.next()) {
 				TaskAndUser taskAndUser = new TaskAndUser();
-
-				System.out.println(rs.getInt(1));
-
 
 				taskAndUser.getTask().setId(rs.getInt(1));
 				taskAndUser.getTask().setName(rs.getString(2));
@@ -642,7 +637,6 @@ public class taskDaoImpl implements taskDao_interface {
 			pstmt.setInt(1,task_id);
 
 
-			System.out.println(pstmt.toString());
 
 			pstmt.executeUpdate();
 

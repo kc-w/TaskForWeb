@@ -8,14 +8,14 @@ public class DBconnection {
     private static final String Driver="com.mysql.jdbc.Driver";
 
 
-//    private static final String DBurl="jdbc:mysql://localhost:3306/taskmanagement";
-//    private static final String user="root";
-//    private static final String password="999999999852";
-
-
-    private static final String DBurl="jdbc:mysql://10.10.0.221:3306/taskmanagement";
+    private static final String DBurl="jdbc:mysql://localhost:3306/taskmanagement";
     private static final String user="root";
-    private static final String password="23252699@Db#1";
+    private static final String password="999999999852";
+
+
+//    private static final String DBurl="jdbc:mysql://10.10.0.221:3306/taskmanagement";
+//    private static final String user="root";
+//    private static final String password="23252699@Db#1";
 
 
     private Connection conn=null;
